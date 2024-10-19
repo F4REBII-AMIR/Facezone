@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Amir",
+    "email": "mamir34310@gmail.com",
+    "password": "1122",
+    "phone": "03477034310",
+    "about": "Haai",
+    "profilePic": "mamir34310@gmail.com-1729212509614-1000075044.jpg"
+  },
+  {
+    "name": "Mohsin2 ",
+    "email": "farebi.amir0786@gmail.com",
+    "password": "1122",
+    "phone": "03477034310",
+    "about": "Kesy Hi",
+    "profilePic": "1729026942207-1000072105.jpg"
+  },
+  {
+    "name": "Maria Hashim ",
+    "email": "maria@gmail.com",
+    "password": "1122",
+    "phone": "33445555",
+    "about": "Hii",
+    "profilePic": "maria@gmail.com-1729055297094-1000055909.jpg"
+  },
+  {
+    "name": "Asad",
+    "email": "asad@gmail.com",
+    "password": "1122",
+    "phone": "03428801530",
+    "about": "I am FSC student ",
+    "profilePic": "asad@gmail.com-1729034193290-1000071647.jpg"
+  },
+  {
+    "name": "Asad Khan",
+    "email": "asad2@gmail.com",
+    "password": "1122",
+    "phone": "03477783388",
+    "about": "I am Hacker",
+    "profilePic": "asad2@gmail.com-1729053877391-1000071645.jpg"
+  },
+  {
+    "name": "Abdullah",
+    "email": "Abduushs@gmail.com",
+    "password": "112233"
+  }
+]
