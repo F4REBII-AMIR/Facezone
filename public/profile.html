@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            padding: 20px;
+        }
+
+        .profile-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #9b59b6;
+        }
+
+        h2 {
+            margin-top: 15px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .info {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .profile-section {
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input, textarea {
+            display: none;
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .profile-section.edit-mode input,
+        .profile-section.edit-mode textarea {
+            display: block;
+        }
+
+        .profile-section.edit-mode p {
+            display: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #9b59b6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #8e44ad;
+        }
+
+        .edit-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .post-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .post-container textarea {
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .post-container input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .post-button {
+            background-color: #9b59b6;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .post-button:hover {
+            background-color: #8e44ad;
+        }
+
+        .post-card {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-card img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+
+        .post-card p {
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <button class="edit-button" onclick="toggleEditMode()">Edit Profile</button>
+        <img id="profile-pic" class="profile-pic" src="/uploads/default-profile.png" alt="Profile Picture">
+        <div class="profile-section">
+            <h2 id="profile-name">Name</h2>
+            <input type="text" id="edit-name" placeholder="Enter your name">
+        </div>
+        <div class="profile-section">
+            <p id="profile-about">About me</p>
+            <textarea id="edit-about" placeholder="Tell something about yourself"></textarea>
+        </div>
+        <div class="profile-section">
+            <p id="profile-email">Email</p>
+            <input type="email" id="edit-email" placeholder="Enter your email">
+        </div>
+        <div class="profile-section">
+            <p id="profile-phone">Phone</p>
+            <input type="text" id="edit-phone" placeholder="Enter your phone number">
+        </div>
+        <input type="file" id="edit-profile-pic" accept="image/*">
+        <button id="save-button" style="display: none;" onclick="saveProfile()">Save Profile</button>
+    </div>
+
+
+    <script>
+        // Fetch profile data from the server
+        fetch('/get-profile')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('profile-name').textContent = data.name || 'Name';
+                document.getElementById('profile-about').textContent = data.about || 'About me';
+                document.getElementById('profile-email').textContent = data.email || 'Email';
+                document.getElementById('profile-phone').textContent = data.phone || 'Phone';
+                document.getElementById('profile-pic').src = data.profilePic || '/uploads/default-profile.png';
+
+                // Pre-fill the edit form with existing data
+                document.getElementById('edit-name').value = data.name || '';
+                document.getElementById('edit-about').value = data.about || '';
+                document.getElementById('edit-email').value = data.email || '';
+                document.getElementById('edit-phone').value = data.phone || '';
+            });
+
+        function toggleEditMode() {
+            const sections = document.querySelectorAll('.profile-section');
+            sections.forEach(section => section.classList.toggle('edit-mode'));
+
+            document.getElementById('edit-profile-pic').style.display = 'block';
+            document.getElementById('save-button').style.display = 'block';
+        }
+
+        // Save updated profile data
+        function saveProfile() {
+            const formData = new FormData();
+            formData.append('name', document.getElementById('edit-name').value);
+            formData.append('about', document.getElementById('edit-about').value);
+            formData.append('email', document.getElementById('edit-email').value);
+            formData.append('phone', document.getElementById('edit-phone').value);
+
+            const profilePicFile = document.getElementById('edit-profile-pic').files[0];
+            if (profilePicFile) {
+                formData.append('profilePic', profilePicFile);
+            }
+
+            fetch('/setup-profile', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    // Reload the profile to display updated data
+                    window.location.reload();
+                }
+            })
+            .catch(error => console.error('Error saving profile:', error));
+        }
+
+        
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://i.ibb.co/mzP4hDz/752831bf7bda33197533837b17933b62.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            animation: borderAnimation 10s infinite;
+        }
+
+        @keyframes borderAnimation {
+            0% { border: 2px solid #ff007f; }
+            25% { border: 2px solid #00bfff; }
+            50% { border: 2px solid #ffea00; }
+            75% { border: 2px solid #ff5e00; }
+            100% { border: 2px solid #ff007f; }
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .logo h1 {
+            color: #ffffff;
+            font-size: 40px;
+            margin-left: 10px;
+            animation: textAnimation 5s infinite;
+        }
+
+        @keyframes textAnimation {
+            0% { color: #ff007f; }
+            25% { color: #00bfff; }
+            50% { color: #ffea00; }
+            75% { color: #ff5e00; }
+            100% { color: #ff007f; }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 10px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        input::placeholder {
+            color: rgba(211, 211, 211, 0.7);
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffffff;
+        }
+
+        button {
+            background-color: transparent;
+            color: #ff007f;
+            border: 2px solid #ff007f;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #ff007f;
+            color: white;
+        }
+
+        #notification {
+            background: transparent;
+            border: none;
+            color: #ff007f;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+        
+
+             position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff007f;
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            z-index: 1000;
+            display: none; /* Initially hidden */
+            
+            animation: popAnimation 0.5s forwards;
+        }
+
+        @keyframes popAnimation {
+            from {
+                transform: translate(-50%, -50%) scale(0);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        p {
+            color: #ffffff;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #00bfff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 20px;
+            }
+            .logo h1 {
+                font-size: 30px;
+            }
+            button {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://i.ibb.co/Ntbt10s/1000075045-removebg-preview.png" alt="Facezone Logo">
+            <h1>Facezone</h1>
+        </div>
+        <h2>Signup</h2>
+        <form id="signup-form">
+            <div class="input-group">
+                <i class="fas fa-user icon"></i>
+                <input type="text" id="name" name="name" placeholder="Name" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope icon"></i>
+                <input type="email" id="email" name="email" placeholder="Email ✉️" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-key icon"></i>
+                <input type="password" id="password" name="password" placeholder="Password 🔑" required>
+            </div>
+            <button type="submit">Signup</button>
+        </form>
+        <div id="notification" class="hidden">
+            <span id="notification-text"></span>
+            <button class="close-btn" onclick="closeNotification()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, password }),
+            });
+
+            if (response.status === 201) {
+                showNotification("Account created successfully. Redirecting to login...");
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 3000); // Redirect after 3 seconds
+            } else {
+                showNotification("Signup failed. User may already exist.");
+            }
+        });
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            document.getElementById('notification-text').innerText = message;
+            notification.classList.remove('hidden');
+            notification.style.display = 'block';
+        }
+
+        function closeNotification() {
+            document.getElementById('notification').classList.add('hidden');
+            document.getElementById('notification').style.display = 'none'; // Hide notification
+        }
+    </script>
+</body>
+</html>

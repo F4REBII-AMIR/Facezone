@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f7f7f7;
+            padding: 20px;
+        }
+
+        .newsfeed-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar:focus {
+            border-color: #9b59b6; /* Change this to your desired color */
+        }
+
+        .post-card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        .post-card:hover {
+            transform: scale(1.02);
+        }
+
+        .post-details {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-details img.profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .large-pic {
+            width: 150px; /* Set size for large images */
+            height: 150px; /* Set height for large images */
+            border-radius: 10px;
+            object-fit: cover;
+            border: 5px solid transparent; /* Initial border color */
+            animation: borderAnimation 2s infinite; /* Apply animation */
+            margin-left: 10px;
+        }
+
+        @keyframes borderAnimation {
+            0% { border-color: #9b59b6; }
+            25% { border-color: #e74c3c; }
+            50% { border-color: #f1c40f; }
+            75% { border-color: #2ecc71; }
+            100% { border-color: #9b59b6; }
+        }
+
+        .user-search-results {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .user-search-result {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .user-search-result img {
+            width: 30px; /* Reduced size for small profile pictures */
+            height: 30px; /* Reduced size for small profile pictures */
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-profile {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: none;
+        }
+
+        .user-profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 4px solid #9b59b6;
+        }
+
+        .user-profile h2 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .user-profile p {
+            color: #555;
+        }
+
+        .homepage-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .homepage-buttons button {
+            padding: 10px 20px;
+            margin: 0 5px;
+            border: 2px solid #9b59b6; /* Border color for buttons */
+            border-radius: 5px;
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .homepage-buttons button:hover {
+            background: #9b59b6; /* Change to desired hover color */
+            color: white; /* Text color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="newsfeed-container">
+        <h1>News Feed</h1>
+
+        <!-- Search bar -->
+        <div class="search-container">
+            <input id="searchInput" class="search-bar" type="text" placeholder="Search by name...">
+        </div>
+
+        <!-- Homepage buttons -->
+        <div class="homepage-buttons">
+            <button onclick="location.href='/profile.html'">Profile</button>
+            <button onclick="location.href='/inbox.html'">Inbox</button>
+        </div>
+
+        <!-- User search results -->
+        <div id="userSearchResults" class="user-search-results" style="display: none;"></div>
+
+        <!-- News feed content -->
+        <div id="feed"></div>
+
+        <!-- User profile display -->
+        <div id="userProfile" class="user-profile"></div>
+    </div>
+
+    <script>
+        let usersData = []; // Array to hold all user data
+
+        // Fetch the news feed data
+        fetch('/newsfeed')
+            .then(response => response.json())
+            .then(data => {
+                usersData = data; // Store the data for later search functionality
+                const feed = document.getElementById('feed');
+
+                if (data.length === 0) {
+                    feed.innerHTML = '<p>No new profile pictures uploaded yet.</p>';
+                } else {
+                    data.forEach(user => {
+                        const postCard = document.createElement('div');
+                        postCard.classList.add('post-card');
+
+                        postCard.innerHTML = `
+                            <div class="post-details">
+                                <img class="profile-pic" src="/uploads/${user.profilePic}" alt="${user.name}'s profile pic">
+                                <h3>${user.name}</h3>
+                                <img class="large-pic" src="/uploads/${user.profilePic}" alt="${user.name}'s profile pic">
+                            </div>
+                        `;
+
+                        feed.appendChild(postCard);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching news feed:', error);
+            });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function (e) {
+            const searchQuery = e.target.value.toLowerCase();
+            const foundUsers = usersData.filter(user => user.name.toLowerCase().includes(searchQuery));
+
+            const userSearchResults = document.getElementById('userSearchResults');
+            userSearchResults.innerHTML = ''; // Clear previous results
+
+            if (foundUsers.length > 0) {
+                // Display all found users' profiles
+                foundUsers.forEach(foundUser => {
+                    const userCard = document.createElement('div');
+                    userCard.classList.add('user-search-result');
+                    userCard.innerHTML = `
+                        <img src="/uploads/${foundUser.profilePic}" alt="${foundUser.name}'s profile picture">
+                        <span>${foundUser.name}</span>
+                    `;
+
+                    // Add click event to show user profile details
+                    userCard.addEventListener('click', () => showUserProfile(foundUser));
+
+                    userSearchResults.appendChild(userCard);
+                });
+                userSearchResults.style.display = 'block';
+                document.getElementById('feed').style.display = 'none';
+            } else {
+                // Reset and show the general feed if no match is found
+                userSearchResults.style.display = 'none';
+                document.getElementById('feed').style.display = 'block';
+            }
+        });
+
+        // Function to display user profile details
+        function showUserProfile(user) {
+            const userProfile = document.getElementById('userProfile');
+            userProfile.innerHTML = `
+                <img src="/uploads/${user.profilePic}" alt="${user.name}'s profile picture">
+                <h2>${user.name}</h2>
+                <p>Email: ${user.email}</p>
+                <p>Phone: ${user.phone}</p>
+                <p>About: ${user.about}</p>
+            `;
+            userProfile.style.display = 'block';
+
+            // Hide the search results and general feed
+            document.getElementById('userSearchResults').style.display = 'none';
+            document.getElementById('feed').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
