@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f7f7f7;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure body takes full height */
+        }
+
+        .newsfeed-container {
+            max-width: 800px;
+            margin: 0 auto;
+            flex: 1; /* Allow the container to grow */
+        }
+
+        .search-bar {
+            display: none;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 100%; /* Full width */
+            margin-bottom: 20px; /* Space below */
+        }
+
+        .search-bar input[type="text"] {
+            width: calc(100% - 50px); /* Full width minus button width */
+            padding: 10px;
+            border: 2px solid #4CAF50; /* Green border */
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .search-bar input[type="submit"] {
+            padding: 7px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            cursor: pointer;
+            position: absolute;
+            right: 0; /* Align to the right */
+            top: 0; /* Align to the top */
+            height: 50%; /* Full height */
+            width: 50px;
+            font-size: 5px;
+        }
+
+        .close-icon {
+            position: absolute;
+            right: 60px; /* Position before search button */
+            top: 5px; /* Position from the top */
+            cursor: pointer;
+            font-size: 25px;
+            color: #e74c3c; /* Red color for close */
+        }
+
+        .post-card {
+            background-color: gray;
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        .post-card:hover {
+            transform: scale(1.02);
+        }
+
+        .post-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .post-details img.profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+
+        .large-pic {
+            width: 100%; /* Full width */
+            height: 50%; /* Half height */
+            border-radius: 10px;
+            object-fit: cover;
+            margin-top: 20px;
+        }
+
+        .user-search-results {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .user-search-result {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .user-search-result img {
+            width: 30px; /* Reduced size for small profile pictures */
+            height: 30px; /* Reduced size for small profile pictures */
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+.user-profile {
+        padding: 20px;
+        margin: 0; /* Remove margin to use full space */
+        border-radius: 0; /* Remove border radius to have sharp corners */
+        background-color: #a8e6cf; /* Change this to your desired lush color */
+        box-shadow: none; /* Remove shadow to blend with the background */
+        text-align: center;
+        display: none; /* Keep it hidden by default */
+        position: fixed; /* Fix position to cover the entire page */
+        top: 0; /* Align to the top */
+        left: 0; /* Align to the left */
+
+        width: 90%; /* Full width */
+        height: 100%; /* Full height */
+        z-index: 999; /* Ensure it appears above other content */
+        overflow: auto; 
+}
+
+        .user-profile img {
+            width: 150px;
+            height : 150px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 4px solid #9b59b6;
+        }
+
+        .user-profile h2 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .user-profile p {
+            color: #555;
+        }
+
+        .homepage-buttons {
+            position: fixed;
+            bottom: 0; /* Pin to the bottom */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 45px; /* Increased space between icons */
+            z-index: 1000;
+            background-color: white; /* Card background */
+            padding: 10px;
+            border-radius: 10px; /* Rounded corners for the card */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .homepage-buttons img {
+            width: 40px; /* Increased size of icons */
+            height: 40px; /* Increased size of icons */
+            cursor: pointer;
+            border: 2px solid transparent; /* Initial border color */
+            border-radius: 50%; /* Circular buttons */
+            transition: border-color 0.3s, background-color 0.3s; /* Transition for border and background */
+        }
+
+        @keyframes borderAnimation {
+            0% { border-color: #9b59b6; }
+            25% { border-color: #e74c3c; }
+            50% { border-color: #f1c40f; }
+            75% { border-color: #2ecc71; }
+            100% { border-color: #9b59b6; }
+        }
+
+        .homepage-buttons img {
+            animation: borderAnimation 8s infinite; /* Change border color every 2 seconds */
+        }
+        .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content */
+    margin-bottom: 20px; /* Space below */
+}
+
+.search-button {
+    padding: 10px 20px; /* Add padding for the button */
+    border: 2px solid red; /* Red border */
+    border-radius: 5px;
+    background-color: white; /* Background color */
+    color: black; /* Text color */
+    cursor: pointer;
+    margin-top: 10px; /* Space above the button */
+}
+    </style>
+</head>
+<body>
+    <div class="homepage-buttons">
+        <img src="https://i.ibb.co/VNQ5LWj/1000078183-removebg-preview.png" onclick="location.href='/profile.html'" alt="Profile">
+        <img src="https://i.ibb.co/d5fNHZS/1000078185-removebg-preview.png" onclick="location.href='/inbox.html'" alt="Messenger">
+        <img src="https://i.ibb.co/VVdCSCF/bell-icon-transparent-notification-free-png.png" onclick="location.href='/notifications.html'" alt="Notification">
+        <img src="https://i.ibb.co/qDBqxVB/54481.png" onclick="showSearchBar()" alt="Search">
+    </div>
+
+    <div class="search-container">
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search...">
+            <span class="close-icon" onclick="hideSearchBar()">×</span>
+        </div>
+        <input type="submit" value="Search" class="search-button" onclick="searchFunction()">
+    </div>
+
+    <div class="newsfeed-container">
+        <!-- News feed content -->
+        <div id="feed"></div>
+
+        <!-- User profile display -->
+        <div id="userProfile" class="user-profile"></div>
+
+        <!-- Search results display -->
+        <div id="searchResults" class="user-search-results"></div>
+    </div>
+
+    <script>
+        let usersData = []; // Array to hold all user data
+        let postsHidden = false; // Flag to track if posts are hidden
+
+        // Fetch the news feed data
+        fetch('/newsfeed')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Fetched data:', data); // Log the fetched data
+                usersData = data; // Store the data for later search functionality
+                const feed = document.getElementById('feed');
+
+                if (data.length === 0) {
+                    feed.innerHTML = '<p>No new profile pictures uploaded yet.</p>';
+                } else {
+                    data.forEach(user => {
+                        const postCard = document.createElement('div');
+                        postCard.classList.add('post-card');
+
+                        postCard.innerHTML = `
+                            <div class="post-details">
+                                <img class="profile-pic" src="/uploads/${user.profilePic}" alt="${user.name}'s profile pic">
+                                <h3>${user.name}</h3>
+                                <img class="large-pic" src="/uploads/${user.profilePic}" alt="${user.name}'s profile pic">
+                            </div>
+                        `;
+
+                        feed.appendChild(postCard);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching news feed:', error);
+            });
+
+        // Show search bar
+        function showSearchBar() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.style.display = 'block';
+            const feed = document.getElementById('feed');
+            feed.style.display = 'none'; // Hide posts
+            postsHidden = true;
+        }
+
+        // Hide search bar
+        function hideSearchBar() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.style.display = 'none';
+            const feed = document.getElementById('feed');
+            feed.style.display = 'block'; // Show posts
+            postsHidden = false;
+        }
+
+        // Search functionality
+        function searchFunction() {
+            const searchInput = document.getElementById('search-input').value.trim();
+            const searchResults = document.getElementById('searchResults');
+
+            if (searchInput !== '') {
+                searchResults.innerHTML = ''; // Clear previous search results
+                usersData.forEach(user => {
+                    if (user.name.toLowerCase().includes(searchInput.toLowerCase())) {
+                        const searchResult = document.createElement('div');
+                        searchResult.classList.add('user-search-result');
+
+                        searchResult.innerHTML = `
+                            <img src="/uploads/${user.profilePic}" alt="${user.name}'s profile picture">
+                            <p>${user.name}</p>
+                        `;
+
+                        searchResult.onclick = () => showUserProfile(user); // Show user profile on click
+
+                        searchResults.appendChild(searchResult);
+                    }
+                });
+            }
+        }
+
+        // Show user profile
+        function showUserProfile(user) {
+            const userProfile = document.getElementById('userProfile');
+            userProfile.innerHTML = `
+                <img src="/uploads/${user.profilePic}" alt="${user.name}'s profile picture">
+                <h2>${user.name}</h2>
+                <p>About: ${user.about}</p>
+            `;
+            userProfile.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
