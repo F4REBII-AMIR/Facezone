@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 
 // Serve the signup and login pages
 app.get('/signup', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'signup.html'));
+    res.sendFile(path.join(__dirname, 'signup.html'));
 });
 
 app.get('/login', (req, res) => {
@@ -49,7 +49,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/homepage', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'homepage.html'));
+    res.sendFile(path.join(__dirname, 'homepage.html'));
 });
 
 // API to handle signup
