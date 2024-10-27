@@ -36,7 +36,7 @@ const upload = multer({ storage });
 
 // Root route redirects to the login page
 app.get('/', (req, res) => {
-    res.redirect('/login');
+    res.redirect('login.html');
 });
 
 // Serve the signup and login pages
@@ -45,7 +45,7 @@ app.get('/signup', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    res.sendFile(path.join(__dirname, 'login.html'));
 });
 
 app.get('/homepage', (req, res) => {
