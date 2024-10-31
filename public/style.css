@@ -1,0 +1,145 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f4f8; /* Light background color */
+}
+
+/* Card Styles */
+.card {
+    background: #ffffff; /* White background for the card */
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; /* Max width for the card */
+    margin: 1rem; /* Space around the card */
+    border: 2px solid rgba(155, 89, 182, 0.8); /* Stylish border */
+}
+
+/* Form Container */
+.form-container {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(155, 89, 182, 0.6); /* Border for input fields */
+    border-radius: 4px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent input background */
+    color: #333;
+}
+
+input::placeholder {
+    color: rgba(0, 0, 0, 0.6); /* Placeholder color */
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4CAF50; /* Green button background */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #388E3C; /* Darker green on hover */
+}
+
+p {
+    margin-top: 1rem;
+    color: #333;
+}
+
+a {
+    color: #9b59b6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Profile Page Styles */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff; /* White background for profile */
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    color: #333;
+    border: 2px solid rgba(155, 89, 182, 0.8); /* Stylish border */
+}
+
+.profile-container img {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 4px solid rgba(155, 89, 182, 0.6); /* Stylish circular border */
+}
+
+.profile-info {
+    text-align: left;
+    width: 100%;
+}
+
+.profile-info label {
+    font-weight: bold;
+}
+
+.profile-info p {
+    margin: 0.5rem 0;
+}
+
+/* Homepage Styles */
+.homepage-container {
+    padding: 2rem;
+    background-color: #ffffff; /* White background for homepage */
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #333;
+    border: 2px solid rgba(155, 89, 182, 0.8); /* Stylish border */
+}
+
+.homepage-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+.homepage-buttons button {
+    width: auto; /* Adjust as needed */
+    padding: 0.75rem 1.5rem;
+    background-color: #4CAF50; /* Green button background */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.homepage-buttons button:hover {
+    background-color: #388E3C; /* Darker green on hover */
+}

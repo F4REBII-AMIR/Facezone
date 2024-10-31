@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap">
+    <style>
+body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://i.ibb.co/mzP4hDz/752831bf7bda33197533837b17933b62.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: auto;
+            height: 100vh;
+            overflow: auto;
+        }
+
+        .container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            animation: borderAnimation 10s infinite;
+        }
+
+        @keyframes borderAnimation {
+            0% { border: 2px solid #ff007f; }
+            25% { border: 2px solid #00bfff; }
+            50% { border: 2px solid #ffea00; }
+            75% { border: 2px solid #ff5e00; }
+            100% { border: 2px solid #ff007f; }
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 80px;
+            border-radius: 50%;
+        }
+
+        .logo h1 {
+            color: #ffffff;
+            font-size: 36px;
+            margin-left: 10px;
+            animation: textAnimation 5s infinite;
+        }
+
+        @keyframes textAnimation {
+            0% { color: #ff007f; }
+            25% { color: #00bfff; }
+            50% { color: #ffea00; }
+            75% { color: #ff5e00; }
+            100% { color: #ff007f; }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 10px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        input::placeholder {
+            color: rgba(211, 211, 211, 0.7);
+            text-align: left;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffffff;
+        }
+
+        button {
+            background-color: transparent;
+            color: #ff007f;
+            border: 2px solid #ff007f;
+            border-radius: 20px ;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: #ff007f;
+            color: white;
+        }
+
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ff007f;
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .notification button {
+            background: transparent;
+            border: none;
+            color: #ff007f;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .notification .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        p {
+            color: #ffffff;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #00bfff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .footer button {
+            background: transparent;
+            border: none;
+            color: #00bfff;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+        }
+
+        .footer button:hover {
+            text-decoration: underline;
+        }
+
+        .footer .copyright {
+            color: #ffffff;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .ceo-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .ceo-info .ceo-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            animation: textAnimation 5s infinite;
+        }
+
+        .ceo-info .developer-info {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        .ceo-info img {
+            width: 80px;
+            border-radius: 50%;
+            margin: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://i.ibb.co/Ntbt10s/1000075045-removebg-preview.png" alt="Facezone Logo">
+            <h1>Facezone</h1>
+        </div>
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <i class="fas fa-envelope icon"></i>
+                <input type="email" id="email" name="email" placeholder="Email address ✉️" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-key icon"></i>
+                <input type="password" id="password" name="password" placeholder="Password 🔑" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+        <p><a href="#" id="forgot-password">Forgot Password?</a></p>
+
+        <div class="notification" id="contact-owner-notification" style="display: none;">
+            <div>For Resetting your Password 🔑 Please Contact With Owner.</div>
+            <button id="contact-now">Contact Now</button>
+        </div>
+
+        <div class="notification" id="notification">
+            <div id="notification-message">Login successful! Redirecting...</div>
+            <button id="close-notification">Close</button>
+        </div>
+           <div class="footer">
+            <button>Privacy Policy</button>
+            <button>About</button>
+            <div class="copyright">Copyright ©️ Facezone 2025</div>
+        </div>
+
+        <div class="ceo-info">
+            <div class="ceo-name">We Are Updating UI And Database For Better Experience</div>
+    </div>
+
+    <script>
+        let randomCode;
+
+        document.getElementById('forgot-password').addEventListener('click', function () {
+            document.getElementById('contact-owner-notification').style.display = 'block';
+        });
+
+        document.getElementById('contact-now').addEventListener('click', function () {
+            window.open('https://wa.me/923477034310', '_blank'); // Redirect to WhatsApp
+        });
+
+        document.getElementById('login-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const result = await response.json();
+
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+
+            if (response.status === 200) {
+                notificationMessage.textContent = '     ✅\n𝐋𝐎𝐆𝐈𝐍\n𝐒𝐔𝐂𝐂𝐄𝐒𝐒𝐅𝐔𝐋';
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = result.redirectUrl;
+                }, 3000); // Redirect after 3 seconds
+            } else {
+                notificationMessage.textContent = '❌ 𝐅𝐀𝐈𝐋𝐄𝐃' + result.message;
+                notification.style.display = 'block';
+            }
+        });
+
+        document.getElementById('close-notification').addEventListener('click', function() {
+            document.getElementById('notification').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
