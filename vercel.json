@@ -2,8 +2,8 @@
   "version": 2,
   "builds": [
       {
-          "src": "",
-          "use": ""
+          "src": "index.js",
+          "use": "npm start"
       }
   ],
   "routes": [
